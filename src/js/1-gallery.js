@@ -85,8 +85,5 @@ galleryList.insertAdjacentHTML('beforeend', markup);
 
 var lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
-  captionDelay: '250',
+  captionDelay: 250,
 });
-// lightbox = SimpleLightbox.open({
-//   items: ['img1-large.jpg', 'img2-large.jpg', 'img3-large.jpg'],
-// });

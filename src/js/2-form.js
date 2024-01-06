@@ -7,15 +7,11 @@ const localStorageKey = 'feedback-form-state';
 
 let parsedSettings = JSON.parse(localStorage.getItem(localStorageKey));
 
-try {
+if (typeof parsedSettings === 'object' && parsedSettings !== null) {
   email.value = parsedSettings.email;
-} catch (error) {
-  email.value = '';
-}
-
-try {
   message.value = parsedSettings.message;
-} catch (error) {
+} else {
+  email.value = '';
   message.value = '';
 }
 
@@ -27,7 +23,8 @@ form.addEventListener('input', () => {
     localStorageKey,
     JSON.stringify({ email: inputEmail, message: inputMessage })
   );
-  parsedSettings = JSON.parse(localStorage.getItem(localStorageKey));
+  parsedSettings.email = inputEmail;
+  parsedSettings.message = inputMessage;
 });
 
 form.addEventListener('submit', event => {
