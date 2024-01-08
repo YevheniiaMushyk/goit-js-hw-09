@@ -5,14 +5,15 @@ const message = form.elements.message;
 
 const localStorageKey = 'feedback-form-state';
 
-let parsedSettings = JSON.parse(localStorage.getItem(localStorageKey));
+const parsedSettings = JSON.parse(localStorage.getItem(localStorageKey));
 
 if (typeof parsedSettings === 'object' && parsedSettings !== null) {
-  email.value = parsedSettings.email;
-  message.value = parsedSettings.message;
-} else {
-  email.value = '';
-  message.value = '';
+  if (parsedSettings.hasOwnProperty(email)) {
+    email.value = parsedSettings.email;
+  }
+  if (parsedSettings.hasOwnProperty(message)) {
+    message.value = parsedSettings.message;
+  }
 }
 
 form.addEventListener('input', () => {
@@ -34,9 +35,9 @@ form.addEventListener('submit', event => {
     console.log(parsedSettings);
   } else {
     alert('Fill in all fields of the form');
+    localStorage.removeItem(localStorageKey);
   }
 
-  localStorage.removeItem(localStorageKey);
   email.value = '';
   message.value = '';
   form.reset();

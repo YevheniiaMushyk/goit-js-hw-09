@@ -83,7 +83,7 @@ const createMarkup = ({ preview, original, description }) => `
 const markup = images.map(createMarkup).join('');
 galleryList.insertAdjacentHTML('beforeend', markup);
 
-var lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
